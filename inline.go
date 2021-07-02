@@ -58,8 +58,8 @@ func (p *Markdown) inline(currBlock *Node, data []byte) {
 	for end < len(data) {
 		handler := p.inlineCallback[data[end]]
 		// A simple patch to correct the fact that no 2 byte runes exist
-		if end >= 1 {
-			fmt.Println(end, string(data[end]), string(data[end-1]))
+		if end < len(data)-1 {
+			fmt.Println(end, string(data[end]), string(data[end+1]))
 		}
 		if end >= 1 && data[end-1] == '$' && data[end] == '$' {
 			handler = func(p *Markdown, data []byte, end int) (int, *Node) {
