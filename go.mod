@@ -1,3 +1,1 @@
-module github.com/Sousho/blackfriday
-
-go 1.13
+module github.com/russross/blackfriday/v2
