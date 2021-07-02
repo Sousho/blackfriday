@@ -334,7 +334,6 @@ var AMsymbols = [
     {input:"gu", tag:"mi", output: " ", tex:"upsilon", type:CONST},
     {input:"gf", tag:"mi", output: " ", tex:"phi", type:CONST},
     {input:"gch", tag:"mi", output: " ", tex:"chi", type:CONST},
-    {input:"gy", tag:"mi", output: " ", tex:"psi", type:CONST},
     {input:"gps", tag:"mi", output: " ", tex:"psi", type:CONST},
     {input:"go", tag:"mi", output: " ", tex:"omega", type:CONST},
     {input:"gA", tag:"mi", output: " ", tex:"Alpha", type:CONST},
@@ -359,7 +358,7 @@ var AMsymbols = [
     {input:"gU", tag:"mi", output: " ", tex:"Upsilon", type:CONST},
     {input:"gF", tag:"mi", output: " ", tex:"Phi", type:CONST},
     {input:"gCh", tag:"mi", output: " ", tex:"Chi", type:CONST},
-    {input:"gY", tag:"mi", output: " ", tex:"Psi", type:CONST},
+    {input:"gPs", tag:"mi", output: " ", tex:"Psi", type:CONST},
     {input:"gO", tag:"mi", output: " ", tex:"Omega", type:CONST}
 ];
 
