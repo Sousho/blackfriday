@@ -153,7 +153,7 @@ func generateDelimitedSpan(open_delim, close_delim string, transform func(conten
 		log.Println("[Delim Pair]", open_delim, close_delim)
 		cmp_str := func(idx int, str string) bool {
 			if idx > len(str) {
-				return string(data[idx-len(str):idx]) == str
+				return string(data[idx-len(str)+1:idx+1]) == str
 			}
 			return false
 		}
