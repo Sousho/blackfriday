@@ -38,7 +38,7 @@ func init_math() {
 }
 
 func render_shorthand(eq []byte) []byte {
-	//log.Println(string(eq))
+	log.Println(string(eq))
 	latex, err := ctx.RunScript("AMTparseAMtoTeX('"+string(eq)+"')", "ascii_math.js")
 	e(err)
 	return []byte("$" + latex.String() + "$")
