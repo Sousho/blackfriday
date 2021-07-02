@@ -30,6 +30,8 @@ const (
 	Softbreak
 	Hardbreak
 	Code
+	InlineMath
+	DisplayMath
 	HTMLSpan
 	Table
 	TableCell
@@ -57,6 +59,8 @@ var nodeTypeNames = []string{
 	Softbreak:      "Softbreak",
 	Hardbreak:      "Hardbreak",
 	Code:           "Code",
+	InlineMath:     "InlineMath",
+	DisplayMath:    "DisplayMath",
 	HTMLSpan:       "HTMLSpan",
 	Table:          "Table",
 	TableCell:      "TableCell",

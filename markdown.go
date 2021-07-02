@@ -174,7 +174,7 @@ type Markdown struct {
 	renderer          Renderer
 	referenceOverride ReferenceOverrideFunc
 	refs              map[string]*reference
-	inlineCallback    [256]inlineParser
+	inlineCallback    map[string]inlineParser
 	extensions        Extensions
 	nesting           int
 	maxNesting        int
@@ -283,28 +283,29 @@ func New(opts ...Option) *Markdown {
 	p.lastMatchedContainer = docNode
 	p.allClosed = true
 	// register inline parsers
-	p.inlineCallback[' '] = maybeLineBreak
-	p.inlineCallback['*'] = emphasis
-	p.inlineCallback['_'] = emphasis
+	p.inlineCallback[" "] = maybeLineBreak
+	p.inlineCallback["*"] = emphasis
+	p.inlineCallback["_"] = emphasis
 	if p.extensions&Strikethrough != 0 {
-		p.inlineCallback['~'] = emphasis
+		p.inlineCallback["~"] = emphasis
 	}
-	p.inlineCallback['$'] = mathSpan
-	p.inlineCallback['`'] = codeSpan
-	p.inlineCallback['\n'] = lineBreak
-	p.inlineCallback['['] = link
-	p.inlineCallback['<'] = leftAngle
-	p.inlineCallback['\\'] = escape
-	p.inlineCallback['&'] = entity
-	p.inlineCallback['!'] = maybeImage
-	p.inlineCallback['^'] = maybeInlineFootnote
+	p.inlineCallback["$"] = mathSpan
+	p.inlineCallback["$$"] = mathSpan
+	p.inlineCallback["`"] = codeSpan
+	p.inlineCallback["\n"] = lineBreak
+	p.inlineCallback["["] = link
+	p.inlineCallback["<"] = leftAngle
+	p.inlineCallback["\\"] = escape
+	p.inlineCallback["&"] = entity
+	p.inlineCallback["!"] = maybeImage
+	p.inlineCallback["^"] = maybeInlineFootnote
 	if p.extensions&Autolink != 0 {
-		p.inlineCallback['h'] = maybeAutoLink
-		p.inlineCallback['m'] = maybeAutoLink
-		p.inlineCallback['f'] = maybeAutoLink
-		p.inlineCallback['H'] = maybeAutoLink
-		p.inlineCallback['M'] = maybeAutoLink
-		p.inlineCallback['F'] = maybeAutoLink
+		p.inlineCallback["h"] = maybeAutoLink
+		p.inlineCallback["m"] = maybeAutoLink
+		p.inlineCallback["f"] = maybeAutoLink
+		p.inlineCallback["H"] = maybeAutoLink
+		p.inlineCallback["M"] = maybeAutoLink
+		p.inlineCallback["F"] = maybeAutoLink
 	}
 	if p.extensions&Footnotes != 0 {
 		p.notes = make([]*reference, 0)

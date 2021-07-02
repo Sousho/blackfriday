@@ -54,15 +54,22 @@ func (p *Markdown) inline(currBlock *Node, data []byte) {
 	p.nesting++
 	beg, end := 0, 0
 	for end < len(data) {
-		handler := p.inlineCallback[data[end]]
+		var handler inlineParser = nil
+		key_len := 0
+		for key, _ := range p.inlineCallback {
+			if end >= len(key) && len(key) > key_len && string(data[end-len(key)]) == key {
+				handler = p.inlineCallback[key]
+				key_len = len(key)
+			}
+		}
 		// A simple patch to correct the fact that no 2 byte runes exist
-		if end < len(data)-1 && data[end+1] == '$' && data[end] == '$' {
+		/*if end < len(data)-1 && data[end+1] == '$' && data[end] == '$' {
 			handler = func(p *Markdown, data []byte, end int) (int, *Node) {
 				consumed, node := p.inlineCallback[data[end]](p, data, end)
 				node.Literal = []byte("$" + string(node.Literal) + "$")
 				return consumed + 2, node
 			}
-		}
+		}*/
 		if handler != nil {
 			if consumed, node := handler(p, data, end); consumed == 0 {
 				// No action from the callback.
@@ -175,7 +182,7 @@ func mathSpan(p *Markdown, data []byte, offset int) (int, *Node) {
 
 	// render the code span
 	if fBegin != fEnd {
-		code := NewNode(Code)
+		code := NewNode(InlineMath)
 		code.Literal = render_shorthand(data[fBegin:fEnd])
 		return end, code
 	}
