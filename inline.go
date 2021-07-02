@@ -158,37 +158,14 @@ func generateDelimitedSpan(open_delim, close_delim string, transform func(conten
 			return false
 		}
 		data = data[offset:]
-		nb := len(open_delim)
-		// find the next delimiter
-		i, end := 0, 0
-		for end = nb; end < len(data) && i < nb; end++ {
-			if cmp_str(end, close_delim) {
-				i++
-			} else {
-				i = 0
-			}
-		}
-		// no matching delimiter?
-		if i < nb && end >= len(data) {
-			log.Println("Overflow", i, nb, end, len(data))
-			return 0, nil
-		}
-		// trim outside whitespace
-		fBegin := nb
-		for fBegin < end && data[fBegin] == ' ' {
-			fBegin++
-		}
-		fEnd := end - nb
-		for fEnd > fBegin && data[fEnd-1] == ' ' {
-			fEnd--
-		}
-		// render the code span
-		if fBegin != fEnd {
+		fBegin := len(open_delim)
+		fEnd := bytes.Index(data, []byte(close_delim))
+		if fBegin < fEnd {
 			code := NewNode(node_type)
 			code.Literal = transform(data[fBegin:fEnd])
-			return end, code
+			return fEnd, code
 		}
-		return end, nil
+		return fEnd, nil
 	}
 }
 
