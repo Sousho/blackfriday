@@ -170,7 +170,7 @@ func generateDelimitedSpan(open_delim, close_delim string, transform func(conten
 		}
 		// no matching delimiter?
 		if i < nb && end >= len(data) {
-			log.Println("Overflow")
+			log.Println("Overflow", i, nb, end, len(data))
 			return 0, nil
 		}
 		// trim outside whitespace
