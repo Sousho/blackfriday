@@ -58,7 +58,9 @@ func (p *Markdown) inline(currBlock *Node, data []byte) {
 		var handler inlineParser = nil
 		key_len := 0
 		for key, _ := range p.inlineCallback {
-			log.Println(string(data[end-len(key)]), key)
+			if end >= len(key) {
+				log.Println(string(data[end-len(key)]), key)
+			}
 			if end >= len(key) && len(key) > key_len && string(data[end-len(key)]) == key {
 				handler = p.inlineCallback[key]
 				key_len = len(key)
