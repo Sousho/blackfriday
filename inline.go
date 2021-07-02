@@ -15,6 +15,8 @@ package blackfriday
 
 import (
 	"bytes"
+	"fmt"
+	"log"
 	"regexp"
 	"strconv"
 )
@@ -56,10 +58,12 @@ func (p *Markdown) inline(currBlock *Node, data []byte) {
 	for end < len(data) {
 		handler := p.inlineCallback[data[end]]
 		// A simple patch to correct the fact that no 2 byte runes exist
+		fmt.Println(end, data[end])
 		if end >= 1 && data[end-1] == '$' && data[end] == '$' {
 			handler = func(p *Markdown, data []byte, end int) (int, *Node) {
 				consumed, node := p.inlineCallback[data[end]](p, data, end)
 				node.Literal = []byte("$" + string(node.Literal) + "$")
+				log.Println(node.Literal)
 				return consumed + 2, node
 			}
 		}
