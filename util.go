@@ -9,7 +9,6 @@ import (
 
 func e(err error) {
 	if err != nil {
-		Err.Println(err)
 		log.Fatal(err)
 	}
 }
