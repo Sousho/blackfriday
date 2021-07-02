@@ -41,12 +41,12 @@ func render_shorthand(eq []byte) []byte {
 	eq_str := strings.Trim(string(eq), " ")
 	eq_str = strings.Replace(eq_str, "\n", "", -1)
 	if eq_str == "" {
-		return []byte("$$")
+		return []byte("")
 	}
 	log.Println(eq_str, len(eq_str))
 	latex, err := ctx.RunScript("AMTparseAMtoTeX('"+eq_str+"')", "ascii_math.js")
 	e(err)
-	return []byte("$" + latex.String() + "$")
+	return []byte(latex.String())
 }
 
 var sousho_directives map[string]string = map[string]string{
