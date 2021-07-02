@@ -150,6 +150,7 @@ func emphasis(p *Markdown, data []byte, offset int) (int, *Node) {
 
 func generateDelimitedSpan(open_delim, close_delim string, transform func(content []byte) []byte, node_type NodeType) func(p *Markdown, data []byte, offset int) (int, *Node) {
 	return func(p *Markdown, data []byte, offset int) (int, *Node) {
+		log.Println("[Delim Pair]", open_delim, close_delim)
 		cmp_str := func(idx int, str string) bool {
 			if idx > len(str) {
 				return string(data[idx-len(str):idx]) == str
