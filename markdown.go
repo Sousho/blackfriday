@@ -283,7 +283,7 @@ func New(opts ...Option) *Markdown {
 	p.lastMatchedContainer = docNode
 	p.allClosed = true
 	// register inline parsers
-	p.inlineCallback = make([string]map)
+	p.inlineCallback = make(map[string]inlineParser)
 	p.inlineCallback[" "] = maybeLineBreak
 	p.inlineCallback["*"] = emphasis
 	p.inlineCallback["_"] = emphasis
