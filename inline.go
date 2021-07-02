@@ -15,7 +15,6 @@ package blackfriday
 
 import (
 	"bytes"
-	"log"
 	"regexp"
 	"strconv"
 )
@@ -61,7 +60,6 @@ func (p *Markdown) inline(currBlock *Node, data []byte) {
 			handler = func(p *Markdown, data []byte, end int) (int, *Node) {
 				consumed, node := p.inlineCallback[data[end]](p, data, end)
 				node.Literal = []byte("$" + string(node.Literal) + "$")
-				log.Println(node.Literal)
 				return consumed + 2, node
 			}
 		}
