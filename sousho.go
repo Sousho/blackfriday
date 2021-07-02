@@ -39,6 +39,7 @@ func init_math() {
 
 func render_shorthand(eq []byte) []byte {
 	eq_str := strings.Trim(string(eq), " ")
+	eq_str = strings.Replace("\n", "")
 	if eq_str == "" {
 		return []byte("$$")
 	}
