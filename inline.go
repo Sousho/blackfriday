@@ -143,53 +143,49 @@ func emphasis(p *Markdown, data []byte, offset int) (int, *Node) {
 	return 0, nil
 }
 
-func mathSpan(p *Markdown, data []byte, offset int) (int, *Node) {
-	init_math()
-	data = data[offset:]
-
-	nb := 0
-
-	// count the number of backticks in the delimiter
-	for nb < len(data) && data[nb] == '$' {
-		nb++
-	}
-
-	// find the next delimiter
-	i, end := 0, 0
-	for end = nb; end < len(data) && i < nb; end++ {
-		if data[end] == '$' {
-			i++
-		} else {
-			i = 0
+func generateDelimitedSpan(open_delim, close_delim string, transform func(content []byte) []byte, node_type NodeType) func(p *Markdown, data []byte, offset int) (int, *Node) {
+	return func(p *Markdown, data []byte, offset int) (int, *Node) {
+		cmp_str := func(idx int, str string) bool {
+			if idx > len(str) {
+				return string(data[idx-len(str):idx]) == str
+			}
+			return false
 		}
+		data = data[offset:]
+		nb := len(open_delim)
+		// find the next delimiter
+		i, end := 0, 0
+		for end = nb; end < len(data) && i < nb; end++ {
+			if cmp_str(end, close_delim) {
+				i++
+			} else {
+				i = 0
+			}
+		}
+		// no matching delimiter?
+		if i < nb && end >= len(data) {
+			return 0, nil
+		}
+		// trim outside whitespace
+		fBegin := nb
+		for fBegin < end && data[fBegin] == ' ' {
+			fBegin++
+		}
+		fEnd := end - nb
+		for fEnd > fBegin && data[fEnd-1] == ' ' {
+			fEnd--
+		}
+		// render the code span
+		if fBegin != fEnd {
+			code := NewNode(node_type)
+			code.Literal = transform(data[fBegin:fEnd])
+			return end, code
+		}
+		return end, nil
 	}
-
-	// no matching delimiter?
-	if i < nb && end >= len(data) {
-		return 0, nil
-	}
-
-	// trim outside whitespace
-	fBegin := nb
-	for fBegin < end && data[fBegin] == ' ' {
-		fBegin++
-	}
-
-	fEnd := end - nb
-	for fEnd > fBegin && data[fEnd-1] == ' ' {
-		fEnd--
-	}
-
-	// render the code span
-	if fBegin != fEnd {
-		code := NewNode(InlineMath)
-		code.Literal = render_shorthand(data[fBegin:fEnd])
-		return end, code
-	}
-
-	return end, nil
 }
 
+/*
 func codeSpan(p *Markdown, data []byte, offset int) (int, *Node) {
 	data = data[offset:]
 
@@ -235,6 +231,7 @@ func codeSpan(p *Markdown, data []byte, offset int) (int, *Node) {
 
 	return end, nil
 }
+*/
 
 // newline preceded by two spaces becomes <br>
 func maybeLineBreak(p *Markdown, data []byte, offset int) (int, *Node) {

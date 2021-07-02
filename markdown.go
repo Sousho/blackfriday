@@ -284,15 +284,16 @@ func New(opts ...Option) *Markdown {
 	p.allClosed = true
 	// register inline parsers
 	p.inlineCallback = make(map[string]inlineParser)
+	init_math()
 	p.inlineCallback[" "] = maybeLineBreak
 	p.inlineCallback["*"] = emphasis
 	p.inlineCallback["_"] = emphasis
 	if p.extensions&Strikethrough != 0 {
 		p.inlineCallback["~"] = emphasis
 	}
-	p.inlineCallback["$"] = mathSpan
-	p.inlineCallback["$$"] = mathSpan
-	p.inlineCallback["`"] = codeSpan
+	p.inlineCallback["$"] = generateDelimitedSpan("$", "$", render_shorthand, InlineMath)
+	p.inlineCallback["$$"] = generateDelimitedSpan("$$", "$$", render_shorthand, DisplayMath)
+	p.inlineCallback["`"] = generateDelimitedSpan("`", "`", func(a []byte) []byte { return a }, Code)
 	p.inlineCallback["\n"] = lineBreak
 	p.inlineCallback["["] = link
 	p.inlineCallback["<"] = leftAngle
