@@ -310,7 +310,7 @@ var AMsymbols = [
     {input:"tt",  tag:"mstyle", atname:"mathvariant", atval:"monospace", output:"tt", tex:"mathtt", ttype:UNARY, notexcopy:true},
     {input:"mathtt", tag:"mstyle", atname:"mathvariant", atval:"monospace", output:"mathtt", tex:null, ttype:UNARY},
     {input:"fr",  tag:"mstyle", atname:"mathvariant", atval:"fraktur", output:"fr", tex:"mathfrak", ttype:UNARY, notexcopy:true},
-    {input:"mathfrak",  tag:"mstyle", atname:"mathvariant", atval:"fraktur", output:"mathfrak", tex:null, ttype:UNARY}
+    {input:"mathfrak",  tag:"mstyle", atname:"mathvariant", atval:"fraktur", output:"mathfrak", tex:null, ttype:UNARY},
 
     {input:"ga", tag:"mi", output: " ", tex:"alpha", type:CONST},
     {input:"gb", tag:"mi", output: " ", tex:"beta", type:CONST},
@@ -360,8 +360,7 @@ var AMsymbols = [
     {input:"gF", tag:"mi", output: " ", tex:"Phi", type:CONST},
     {input:"gCh", tag:"mi", output: " ", tex:"Chi", type:CONST},
     {input:"gY", tag:"mi", output: " ", tex:"Psi", type:CONST},
-    {input:"gO", tag:"mi", output: " ", tex:"Omega", type:CONST},
-
+    {input:"gO", tag:"mi", output: " ", tex:"Omega", type:CONST}
 ];
 
 function compareNames(s1,s2) {
