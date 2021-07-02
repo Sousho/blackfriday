@@ -169,6 +169,14 @@ func TestEmphasis(t *testing.T) {
 	doTestsInline(t, tests)
 }
 
+func TestMath(t *testing.T) {
+	var tests = []string{
+		"nothing inline $Hello$ a math $test int_a^b f(x) dx$.\n",
+		"<p>nothing inline</p>\n",
+	}
+	doTestsInline(t, tests)
+}
+
 func TestNoIntraEmphasis(t *testing.T) {
 	tests := []string{
 		"some para_graph with _emphasised_ text.\n",

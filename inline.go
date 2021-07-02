@@ -15,6 +15,7 @@ package blackfriday
 
 import (
 	"bytes"
+	"log"
 	"regexp"
 	"strconv"
 )
@@ -107,6 +108,53 @@ func emphasis(p *parser, out *bytes.Buffer, data []byte, offset int) int {
 	}
 
 	return 0
+}
+
+func math(p *parser, out *bytes.Buffer, data []byte, offset int) int {
+	init_math()
+	data = data[offset:]
+
+	nb := 0
+
+	// count the number of backticks in the delimiter
+	for nb < len(data) && data[nb] == '$' {
+		nb++
+	}
+
+	// find the next delimiter
+	i, end := 0, 0
+	for end = nb; end < len(data) && i < nb; end++ {
+		if data[end] == '$' {
+			i++
+		} else {
+			i = 0
+		}
+	}
+
+	// no matching delimiter?
+	if i < nb && end >= len(data) {
+		return 0
+	}
+
+	// trim outside whitespace
+	fBegin := nb
+	for fBegin < end && data[fBegin] == ' ' {
+		fBegin++
+	}
+
+	fEnd := end - nb
+	for fEnd > fBegin && data[fEnd-1] == ' ' {
+		fEnd--
+	}
+
+	// render the code span
+	if fBegin != fEnd {
+		log.Println(string(data[fBegin:fEnd]))
+		p.r.NormalText(out, render_shorthand(data[fBegin:fEnd]))
+	}
+
+	return end
+
 }
 
 func codeSpan(p *parser, out *bytes.Buffer, data []byte, offset int) int {

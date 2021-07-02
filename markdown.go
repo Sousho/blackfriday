@@ -368,6 +368,7 @@ func MarkdownOptions(input []byte, renderer Renderer, opts Options) []byte {
 	// register inline parsers
 	p.inlineCallback['*'] = emphasis
 	p.inlineCallback['_'] = emphasis
+	p.inlineCallback['$'] = math
 	if extensions&EXTENSION_STRIKETHROUGH != 0 {
 		p.inlineCallback['~'] = emphasis
 	}
@@ -377,7 +378,6 @@ func MarkdownOptions(input []byte, renderer Renderer, opts Options) []byte {
 	p.inlineCallback['<'] = leftAngle
 	p.inlineCallback['\\'] = escape
 	p.inlineCallback['&'] = entity
-
 	if extensions&EXTENSION_AUTOLINK != 0 {
 		p.inlineCallback[':'] = autoLink
 	}
