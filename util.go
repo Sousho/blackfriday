@@ -10,6 +10,7 @@ import (
 func e(err error) {
 	if err != nil {
 		log.Fatal(err)
+		panic(err)
 	}
 }
 
