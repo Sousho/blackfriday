@@ -163,9 +163,9 @@ func generateDelimitedSpan(open_delim, close_delim string, transform func(conten
 		if fBegin < fEnd {
 			code := NewNode(node_type)
 			code.Literal = transform(data[fBegin:fEnd])
-			return fEnd, code
+			return fEnd + len(close_delim), code
 		}
-		return fEnd, nil
+		return fEnd + len(close_delim), nil
 	}
 }
 
