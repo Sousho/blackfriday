@@ -64,7 +64,7 @@ func (p *Markdown) inline(currBlock *Node, data []byte) {
 			//if end >= len(key) {
 			//log.Println("key", string(data[end-len(key):end]), key)
 			//}
-			if end >= len(key) && len(key) > key_len && string(data[end-len(key):end]) == key {
+			if end+len(key) < len(data) && len(key) > key_len && string(data[end:end+len(key)]) == key {
 				handler = p.inlineCallback[key]
 				key_len = len(key)
 				chosen_key = key
@@ -170,9 +170,9 @@ func generateDelimitedSpan(open_delim, close_delim string, transform func(conten
 			code := NewNode(node_type)
 			log.Println("Gen", string(data[fBegin:fEnd]))
 			code.Literal = transform(data[fBegin:fEnd])
-			return fEnd, code
+			return fEnd + len(close_delim), code
 		}
-		return fEnd, nil
+		return fEnd + len(close_delim), nil
 	}
 }
 
