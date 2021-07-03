@@ -29,10 +29,10 @@ var AMsqrt = {input:"sqrt", tag:"msqrt", output:"sqrt", tex:null, ttype:UNARY},
     AMquote = {input:"\"",   tag:"mtext", output:"mbox", tex:null, ttype:TEXT};
 
 var AMsymbols = [
-    {input:"Res",  tag:"mi", output:"o", "text{Res}", ttype:CONST},
+    /*{input:"Res",  tag:"mi", output:"o", "text{Res}", ttype:CONST},
     {input:"Im",  tag:"mi", output:"o", "text{Im}", ttype:CONST},
     {input:"Re",  tag:"mi", output:"o", "text{Re}", ttype:CONST},
-    {input:"exp",  tag:"mi", output:"o", "text{exp}", ttype:CONST},
+    {input:"exp",  tag:"mi", output:"o", "text{exp}", ttype:CONST},*/
     //some greek symbols
     {input:"alpha",  tag:"mi", output:"\u03B1", tex:null, ttype:CONST},
     {input:"beta",   tag:"mi", output:"\u03B2", tex:null, ttype:CONST},
@@ -899,6 +899,23 @@ function AMTparseAMtoTeX(str) {
     str = str.replace(/(&nbsp;|\u00a0|&#160;)/g,"");
     str = str.replace(/&gt;/g,">");
     str = str.replace(/&lt;/g,"<");
+
+    var math_fonts = {"m" : "mathbb", "s" : "mathcal", "scr" : "mathscr"}
+    var equality_symbols = {"p" : "+", "m" : "-", "he" : "\\ge", "le" : "\\le", "g" : ">", "l" : "<"}
+    var forbidden_symbols = ["sup", "max", "min", "sin", "cos", "csc", "sec", "cap"]
+    str = str.replace("inv", "^(-1)")
+    str = str.replace(/\b(m|s|scr)([a-z])([0-9]{0,5})(p|m|he|le|g|l{0,1})([a-zA-Z0-9]{0,1})\b/g, function(match, script, character, dimension, equality, bound) {
+        for (var j = 0; j < forbidden_symbols.length; j ++ ) {
+            if(match == forbidden_symbols[j]) {
+                return match
+            }
+        }
+        var return_string =  "\\" + math_fonts[script] + "(" + character.toUpperCase() + ")" + (dimension ? "^(" + dimension +  ")" : "") + (equality ? "_(" + equality_symbols[equality] + (bound ? " " + bound : "") + ")" : "") + " "
+        return return_string
+    })
+    str = str.replace(/([a-zA-Z]{1,10})([0-9]{1,5})/g, function(match, term, subscript) {
+        return term + "_{" + subscript + "} "
+    })
     if (str.match(/\S/)==null) {
         return "";
     }
