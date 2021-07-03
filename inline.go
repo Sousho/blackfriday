@@ -156,7 +156,7 @@ func generateDelimitedSpan(open_delim, close_delim string, transform func(conten
 			return false
 		}*/
 		data = data[offset:]
-		fBegin := len(open_delim)
+		fBegin := len(open_delim) - 1
 		fEnd := bytes.Index(data, []byte(close_delim))
 		if fBegin < fEnd {
 			code := NewNode(node_type)
