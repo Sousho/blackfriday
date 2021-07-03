@@ -18,6 +18,7 @@ import (
 	"log"
 	"regexp"
 	"strconv"
+	"strings"
 )
 
 var (
@@ -60,16 +61,16 @@ func (p *Markdown) inline(currBlock *Node, data []byte) {
 		key_len := 0
 		chosen_key := ""
 		for key, _ := range p.inlineCallback {
-			if end >= len(key) {
-				//log.Println("key", string(data[end-len(key):end]), key)
-			}
+			//if end >= len(key) {
+			//log.Println("key", string(data[end-len(key):end]), key)
+			//}
 			if end >= len(key) && len(key) > key_len && string(data[end-len(key):end]) == key {
 				handler = p.inlineCallback[key]
 				key_len = len(key)
 				chosen_key = key
 			}
 		}
-		if chosen_key != "" {
+		if strings.Trim(chosen_key) != "" {
 			log.Println(chosen_key)
 		}
 		// A simple patch to correct the fact that no 2 byte runes exist
@@ -167,6 +168,7 @@ func generateDelimitedSpan(open_delim, close_delim string, transform func(conten
 		fEnd := bytes.Index(data, []byte(close_delim))
 		if fBegin < fEnd {
 			code := NewNode(node_type)
+			log.Println(string(data[fBegin:fEnd]))
 			code.Literal = transform(data[fBegin:fEnd])
 			return fEnd + len(close_delim), code
 		}
