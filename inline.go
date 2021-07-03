@@ -61,7 +61,7 @@ func (p *Markdown) inline(currBlock *Node, data []byte) {
 		chosen_key := ""
 		for key, _ := range p.inlineCallback {
 			if end >= len(key) {
-				log.Println("key", string(data[end-len(key):end]), key)
+				//log.Println("key", string(data[end-len(key):end]), key)
 			}
 			if end >= len(key) && len(key) > key_len && string(data[end-len(key):end]) == key {
 				handler = p.inlineCallback[key]
