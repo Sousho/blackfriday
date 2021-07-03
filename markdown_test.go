@@ -34,6 +34,9 @@ func TestDocument(t *testing.T) {
 		// https://github.com/russross/blackfriday/issues/173
 		"   [",
 		"<p>[</p>\n",
+
+		// Math parsing
+		"\\[int_(a)^(b)\\]",
 	}
 	doTests(t, tests)
 }

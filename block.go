@@ -174,6 +174,11 @@ func (p *Markdown) block(data []byte) {
 			continue
 		}
 
+		// Display mode math or math beginning a newline
+		//
+		// \(int_a^0 f(x) dx\) is an integral.
+		// \[gh(x)\]
+
 		// definition lists:
 		//
 		// Term 1

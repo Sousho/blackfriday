@@ -11,7 +11,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"log"
 	"strings"
 	"unicode/utf8"
 )
@@ -413,8 +412,8 @@ func (p *Markdown) Parse(input []byte) *Node {
 	}
 	// Walk the tree again and process inline markdown in each block
 	p.doc.Walk(func(node *Node, entering bool) WalkStatus {
-		log.Println(node.Type, string(node.Literal))
-		if node.Type == Paragraph || node.Type == Heading || node.Type == TableCell || node.Type == InlineMath || node.Type == DisplayMath {
+		//log.Println(node.Type, string(node.Literal))
+		if node.Type == Paragraph || node.Type == Heading || node.Type == TableCell || node.Type == InlineMath || node.Type == DisplayMath || node.Type == Text {
 			p.inline(node, node.content)
 			node.content = nil
 		}
