@@ -67,7 +67,9 @@ func (p *Markdown) inline(currBlock *Node, data []byte) {
 				chosen_key = key
 			}
 		}
-		log.Println(chosen_key)
+		if chosen_key != "" {
+			log.Println(chosen_key)
+		}
 		// A simple patch to correct the fact that no 2 byte runes exist
 		/*if end < len(data)-1 && data[end+1] == '$' && data[end] == '$' {
 			handler = func(p *Markdown, data []byte, end int) (int, *Node) {
