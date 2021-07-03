@@ -116,9 +116,9 @@ var AMsymbols = [
     {input:"in",  tag:"mo", output:"\u2208", tex:null, ttype:CONST},
     {input:"!in", tag:"mo", output:"\u2209", tex:"notin", ttype:CONST},
     {input:"sub", tag:"mo", output:"\u2282", tex:"subset", ttype:CONST},
-    {input:"sup", tag:"mo", output:"\u2283", tex:"supset", ttype:CONST},
+    {input:"supset", tag:"mo", output:"\u2283", tex:"supset", ttype:CONST},
     {input:"sube", tag:"mo", output:"\u2286", tex:"subseteq", ttype:CONST},
-    {input:"supe", tag:"mo", output:"\u2287", tex:"supseteq", ttype:CONST},
+    {input:"supsete", tag:"mo", output:"\u2287", tex:"supseteq", ttype:CONST},
     {input:"-=",  tag:"mo", output:"\u2261", tex:"equiv", ttype:CONST},
     {input:"~=",  tag:"mo", output:"\u2245", tex:"stackrel{\\sim}{=}", notexcopy: true, ttype:CONST}, //back hack b/c mimetex doesn't support /cong
     {input:"cong",   tag:"mo", output:"~=", tex:null, ttype:DEFINITION},
