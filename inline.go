@@ -15,7 +15,6 @@ package blackfriday
 
 import (
 	"bytes"
-	"log"
 	"regexp"
 	"strconv"
 )
@@ -62,7 +61,7 @@ func (p *Markdown) inline(currBlock *Node, data []byte) {
 				log.Println(string(data[end-len(key)+1:end+1]), key)
 			}*/
 			if end >= len(key) && len(key) > key_len && string(data[end-len(key)+1:end+1]) == key {
-				log.Println(string(data[end-len(key)+1:end+1]), key)
+				//log.Println(string(data[end-len(key)+1:end+1]), key)
 				handler = p.inlineCallback[key]
 				key_len = len(key)
 			}
@@ -150,7 +149,7 @@ func emphasis(p *Markdown, data []byte, offset int) (int, *Node) {
 
 func generateDelimitedSpan(open_delim, close_delim string, transform func(content []byte) []byte, node_type NodeType) func(p *Markdown, data []byte, offset int) (int, *Node) {
 	return func(p *Markdown, data []byte, offset int) (int, *Node) {
-		log.Println("[Delim Pair]", open_delim, close_delim)
+		//log.Println("[Delim Pair]", open_delim, close_delim)
 		/*cmp_str := func(idx int, str string) bool {
 			if idx > len(str) {
 				return string(data[idx-len(str)+1:idx+1]) == str

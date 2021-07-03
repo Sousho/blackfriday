@@ -43,7 +43,7 @@ func render_shorthand(eq []byte) []byte {
 	if eq_str == "" {
 		return []byte("")
 	}
-	log.Println(eq_str, len(eq_str))
+	//log.Println(eq_str, len(eq_str))
 	latex, err := ctx.RunScript("AMTparseAMtoTeX('"+eq_str+"')", "ascii_math.js")
 	e(err)
 	return []byte(latex.String())
