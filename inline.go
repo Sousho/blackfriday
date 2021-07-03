@@ -70,7 +70,7 @@ func (p *Markdown) inline(currBlock *Node, data []byte) {
 				chosen_key = key
 			}
 		}
-		if strings.Trim(chosen_key) != "" {
+		if strings.Trim(chosen_key, " ") != "" {
 			log.Println(chosen_key)
 		}
 		// A simple patch to correct the fact that no 2 byte runes exist
