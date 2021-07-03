@@ -54,7 +54,7 @@ func (p *Markdown) inline(currBlock *Node, data []byte) {
 	}
 	p.nesting++
 	beg, end := 0, 0
-	log.Println(currBlock.Type, data)
+	log.Println(currBlock.Type, string(data))
 	for end < len(data) {
 		var handler inlineParser = nil
 		key_len := 0
