@@ -27,6 +27,7 @@ const (
 	Text
 	HTMLBlock
 	CodeBlock
+	MathBlock
 	Softbreak
 	Hardbreak
 	Code

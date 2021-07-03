@@ -15,6 +15,7 @@ package blackfriday
 
 import (
 	"bytes"
+	"log"
 	"regexp"
 	"strconv"
 )
@@ -53,6 +54,7 @@ func (p *Markdown) inline(currBlock *Node, data []byte) {
 	}
 	p.nesting++
 	beg, end := 0, 0
+	log.Println(currBlock.Type, data)
 	for end < len(data) {
 		var handler inlineParser = nil
 		key_len := 0
