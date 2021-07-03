@@ -29,6 +29,10 @@ var AMsqrt = {input:"sqrt", tag:"msqrt", output:"sqrt", tex:null, ttype:UNARY},
     AMquote = {input:"\"",   tag:"mtext", output:"mbox", tex:null, ttype:TEXT};
 
 var AMsymbols = [
+    {input:"Res",  tag:"mi", output:"o", "text{Res}", ttype:CONST},
+    {input:"Im",  tag:"mi", output:"o", "text{Im}", ttype:CONST},
+    {input:"Re",  tag:"mi", output:"o", "text{Re}", ttype:CONST},
+    {input:"exp",  tag:"mi", output:"o", "text{exp}", ttype:CONST},
     //some greek symbols
     {input:"alpha",  tag:"mi", output:"\u03B1", tex:null, ttype:CONST},
     {input:"beta",   tag:"mi", output:"\u03B2", tex:null, ttype:CONST},
