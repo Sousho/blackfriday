@@ -168,7 +168,7 @@ func generateDelimitedSpan(open_delim, close_delim string, transform func(conten
 		fEnd := bytes.Index(data, []byte(close_delim))
 		if fBegin < fEnd {
 			code := NewNode(node_type)
-			log.Println(string(data[fBegin:fEnd]))
+			log.Println("Gen", string(data[fBegin:fEnd]))
 			code.Literal = transform(data[fBegin:fEnd])
 			return fEnd + len(close_delim), code
 		}
