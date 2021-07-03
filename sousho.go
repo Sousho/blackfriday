@@ -50,16 +50,16 @@ func render_shorthand(eq []byte) []byte {
 }
 
 var sousho_directives map[string]string = map[string]string{
-	"start lemma":      "\\begin{lemma}",
-	"end lemma":        "\\end{lemma}",
-	"start theorem":    "\\begin{theorem}",
-	"end theorem":      "\\end{theorem}",
-	"start remark":     "\\begin{remark}",
-	"end remark":       "\\end{remark}",
-	"start exercise":   "\\begin{exercise}",
-	"end exercise":     "\\end{exercise}",
-	"start definition": "\\begin{definition}",
-	"end definition":   "\\end{definition}",
+	"Start lemma":      "\\begin{lemma}",
+	"End lemma":        "\\end{lemma}",
+	"Start theorem":    "\\begin{theorem}",
+	"End theorem":      "\\end{theorem}",
+	"Start remark":     "\\begin{remark}",
+	"End remark":       "\\end{remark}",
+	"Start exercise":   "\\begin{exercise}",
+	"End exercise":     "\\end{exercise}",
+	"Start definition": "\\begin{definition}",
+	"End definition":   "\\end{definition}",
 }
 
 /*func process_sousho(text []byte) []byte {
