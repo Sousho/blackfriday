@@ -920,6 +920,7 @@ function AMTparseAMtoTeX(str) {
     if (str.match(/\S/)==null) {
         return "";
     }
+    console.log(str);
     return AMTparseExpr(str.replace(/^\s+/g,""),false)[0];
 }
 
