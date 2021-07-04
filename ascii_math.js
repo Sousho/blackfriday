@@ -311,6 +311,7 @@ var AMsymbols = [
     {input:"mathsf", tag:"mstyle", atname:"mathvariant", atval:"sans-serif", output:"mathsf", tex:null, ttype:UNARY},
     {input:"bbb", tag:"mstyle", atname:"mathvariant", atval:"double-struck", output:"bbb", tex:"mathbb", ttype:UNARY, notexcopy:true},
     {input:"mathbb", tag:"mstyle", atname:"mathvariant", atval:"double-struck", output:"mathbb", tex:null, ttype:UNARY},
+    {input:"mathscr", tag:"mstyle", atname:"mathvariant", atval:"double-struck", output:"mathscr", tex:null, ttype:UNARY},
     {input:"cc",  tag:"mstyle", atname:"mathvariant", atval:"script", output:"cc", tex:"mathcal", ttype:UNARY, notexcopy:true},
     {input:"mathcal", tag:"mstyle", atname:"mathvariant", atval:"script", output:"mathcal", tex:null, ttype:UNARY},
     {input:"tt",  tag:"mstyle", atname:"mathvariant", atval:"monospace", output:"tt", tex:"mathtt", ttype:UNARY, notexcopy:true},
