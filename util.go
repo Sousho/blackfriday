@@ -2,14 +2,12 @@ package blackfriday
 
 import (
 	"io/fs"
-	"log"
 	"os"
 	"path/filepath"
 )
 
 func e(err error) {
 	if err != nil {
-		log.Fatal(err)
 		panic(err)
 	}
 }
