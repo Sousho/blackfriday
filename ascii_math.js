@@ -80,7 +80,7 @@ var AMsymbols = [
     {input:"//", tag:"mo", output:"/",      tex:"/", ttype:CONST, val:true, notexcopy:true},
     {input:"\\\\", tag:"mo", output:"\\",   tex:"backslash", ttype:CONST},
     {input:"setminus", tag:"mo", output:"\\", tex:null, ttype:CONST},
-    {input:"xx", tag:"mo", output:"\u00D7", tex:"times", ttype:CONST},
+    {input:"cp", tag:"mo", output:"\u00D7", tex:"times", ttype:CONST},
     {input:"|><", tag:"mo", output:"\u22C9", tex:"ltimes", ttype:CONST},
     {input:"><|", tag:"mo", output:"\u22CA", tex:"rtimes", ttype:CONST},
     {input:"|><|", tag:"mo", output:"\u22C8", tex:"bowtie", ttype:CONST},
@@ -92,7 +92,7 @@ var AMsymbols = [
     {input:"o.", tag:"mo", output:"\u2299", tex:"odot", ttype:CONST},
     {input:"sum", tag:"mo", output:"\u2211", tex:null, ttype:UNDEROVER},
     {input:"prod", tag:"mo", output:"\u220F", tex:null, ttype:UNDEROVER},
-    {input:"^^",  tag:"mo", output:"\u2227", tex:"wedge", ttype:CONST},
+    {input:"wp",  tag:"mo", output:"\u2227", tex:"wedge", ttype:CONST},
     {input:"^^^", tag:"mo", output:"\u22C0", tex:"bigwedge", ttype:UNDEROVER},
     {input:"vv",  tag:"mo", output:"\u2228", tex:"vee", ttype:CONST},
     {input:"vvv", tag:"mo", output:"\u22C1", tex:"bigvee", ttype:UNDEROVER},
@@ -901,11 +901,11 @@ function AMTparseAMtoTeX(str) {
     str = str.replace(/&gt;/g,">");
     str = str.replace(/&lt;/g,"<");
 
-    var math_fonts = {"m" : "mathbb", "s" : "mathcal", "scr" : "mathscr"}
+    var math_fonts = {"m" : "mathbb", "s" : "mathcal", "q" : "mathscr"}
     var equality_symbols = {"p" : "+", "m" : "-", "he" : "\\ge", "le" : "\\le", "g" : ">", "l" : "<"}
     var forbidden_symbols = ["sup", "max", "min", "sin", "cos", "csc", "sec", "cap"]
     str = str.replace("inv", "^(-1)")
-    str = str.replace(/\b(m|s|scr)([a-z])([0-9]{0,5})(p|m|he|le|g|l{0,1})([a-zA-Z0-9]{0,1})\b/g, function(match, script, character, dimension, equality, bound) {
+    str = str.replace(/\b(m|s|q)([a-z])([0-9]{0,5})(p|m|he|le|g|l{0,1})([a-zA-Z0-9]{0,1})\b/g, function(match, script, character, dimension, equality, bound) {
         for (var j = 0; j < forbidden_symbols.length; j ++ ) {
             if(match == forbidden_symbols[j]) {
                 return match
