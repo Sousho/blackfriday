@@ -902,7 +902,7 @@ function AMTparseAMtoTeX(str) {
     str = str.replace(/&gt;/g,">");
     str = str.replace(/&lt;/g,"<");
 
-    var math_fonts = {"m" : "mathbb", "s" : "mathcal", "q" : "mathscr"}
+    var math_fonts = {"m" : "mathscr", "s" : "mathcal", "q" : "mathscr"}
     var equality_symbols = {"p" : "+", "m" : "-", "he" : "\\ge", "le" : "\\le", "g" : ">", "l" : "<"}
     var forbidden_symbols = ["sup", "max", "min", "sin", "cos", "csc", "sec", "cap"]
     str = str.replace("inv", "^(-1)")
