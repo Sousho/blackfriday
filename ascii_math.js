@@ -912,7 +912,7 @@ function AMTparseAMtoTeX(str) {
                 return match
             }
         }
-        var return_string =  "\\" + math_fonts[script] + "(" + character.toUpperCase() + ")" + (dimension ? "^(" + dimension +  ")" : "") + (equality ? "_(" + equality_symbols[equality] + (bound ? " " + bound : "") + ")" : "") + " "
+        var return_string =  math_fonts[script] + "(" + character.toUpperCase() + ")" + (dimension ? "^(" + dimension +  ")" : "") + (equality ? "_(" + equality_symbols[equality] + (bound ? " " + bound : "") + ")" : "") + " "
         return return_string
     })
     str = str.replace(/([a-zA-Z]{1,10})([0-9]{1,5})/g, function(match, term, subscript) {
