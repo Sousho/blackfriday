@@ -293,6 +293,7 @@ func New(opts ...Option) *Markdown {
 	}
 	p.inlineCallback["\\("] = generateDelimitedSpan("\\(", "\\)", render_shorthand, InlineMath)
 	p.inlineCallback["\\["] = generateDelimitedSpan("\\[", "\\]", render_shorthand, DisplayMath)
+	p.inlineCallback["\\{"] = generateDelimitedSpan("\\{", "\\}", render_shorthand, UnbrokenDisplayMath)
 	p.inlineCallback["`"] = generateDelimitedSpan("`", "`", func(a []byte) []byte { return a }, Code)
 	p.inlineCallback["\n"] = lineBreak
 	p.inlineCallback["["] = link

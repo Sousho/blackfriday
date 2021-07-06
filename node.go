@@ -33,6 +33,7 @@ const (
 	Code
 	InlineMath
 	DisplayMath
+	UnbrokenDisplayMath
 	HTMLSpan
 	Table
 	TableCell
